@@ -49,5 +49,4 @@ public class hangMan {
         String randomWord = wordsArray.get(randomIndex);
         return randomWord;
     }
-
 }
