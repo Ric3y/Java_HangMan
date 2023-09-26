@@ -1,1 +1,1 @@
-# Hangman project for CSE 1325 at UTA
+Hangman project for CSE 1325 at UTA
