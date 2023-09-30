@@ -1,13 +1,13 @@
-import java.io.*;
+giimport java.io.*;
 import java.util.*;
 
 public class hangMan {
+    private static int guessLeft = 7;
     public static void main(String[] args) throws FileNotFoundException {
         //Variable initialization
         Scanner scanner = new Scanner(System.in);
         ArrayList<String> wordsArray = new ArrayList<>();
         String randomWord;
-        int guessLeft = 7;
         char guess;
 
         //Call function to get read in file and get random word 
@@ -30,6 +30,8 @@ public class hangMan {
             System.out.print("Enter your guess with a character");
             guess = scanner.next().charAt(1);
             checkGuess(guess);
+            System.out.println(guessLeft);
+            System.out.println(guess);  
         }
 
 
@@ -78,6 +80,6 @@ public class hangMan {
     * Check user input to word, main game logic here 
     */
     public static void checkGuess(char guess) {
-        guess--;
+        guessLeft--;
     }
 }
