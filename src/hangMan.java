@@ -1,4 +1,4 @@
-giimport java.io.*;
+import java.io.*;
 import java.util.*;
 
 public class hangMan {
