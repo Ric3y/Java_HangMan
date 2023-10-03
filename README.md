@@ -1,1 +1,3 @@
-Hangman project for CSE 1325 at UTA
+Hangman project made with Java 
+
+To do: game logic + gui (Swing/JavaFX)
