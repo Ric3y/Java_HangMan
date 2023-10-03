@@ -4,34 +4,21 @@ import java.util.*;
 public class hangMan {
     private static int guessLeft = 7;
     public static void main(String[] args) throws FileNotFoundException {
-        //Variable initialization
         Scanner scanner = new Scanner(System.in);
-        ArrayList<String> wordsArray = new ArrayList<>();
-        String randomWord;
+        String randomWord = randomWordGenerator(readFile("wordList.txt"));
         char guess;
-
-        //Call function to get read in file and get random word 
-        wordsArray = readFile("wordList.txt");
-        randomWord = randomWordGenerator(wordsArray);
-        
-        //censor random word with underscores 
-        //censorWord = "_____"
-        char[] censorWord = randomWord.toCharArray();
-        for(int i = 0; i < censorWord.length; i++) {
-            censorWord[i] = '_';
-        }
-
+    
         //Start of game
-        System.out.println("Welcome to Hang Man"); 
-        System.out.println("You will have 7 attemps to guess a random 5 letters word");
-        System.out.print("Random word is: " + randomWord); //remove later 
+        System.out.println("WELCOME TO HANGMAN"); 
+        System.out.println("You will have " + guessLeft + " attemps to guess a random word");
+        System.out.println("Random word is: " + randomWord); //remove later 
 
         while (guessLeft > 0) {
-            System.out.print("Enter your guess with a character");
-            guess = scanner.next().charAt(1);
-            checkGuess(guess);
-            System.out.println(guessLeft);
-            System.out.println(guess);  
+            System.out.println("You have " + guessLeft + " left");
+            System.out.println("Enter your guess with a character");
+            guess = scanner.next().charAt(0);
+            System.out.println("You guessed " + guess);
+            checkGuess(guess);  
         }
 
 
@@ -47,19 +34,15 @@ public class hangMan {
         String line;
 
         try {
-            // Read the text file line by line.
             while ((line = reader.readLine()) != null) {
-                // Split each line into words using the newline character as a delimiter.
                 String[] lineWords = line.split("\n");
 
-                // Add each word to the ArrayList.
                 for (String word : lineWords) {
-                    wordsArray.add(word);
+                    wordsArray.add(word.toLowerCase());
                 }
             }
             reader.close();
         } catch (Exception e) {
-            // Handle any exceptions when file does not exist.
             System.err.println("An error occurred while reading the file: " + e.getMessage());
         }
         return wordsArray;
@@ -70,10 +53,20 @@ public class hangMan {
     */
     public static String randomWordGenerator(ArrayList<String> wordsArray) {
         Random random = new Random();
-        // Generate a random index within the range of the ArrayList size.
         int randomIndex = random.nextInt(wordsArray.size());
         String randomWord = wordsArray.get(randomIndex);
         return randomWord;
+    }
+
+    /**
+    * Generates an array of underscores(_) given a word
+    */
+    public static char[] censorWord(String word) {
+        char[] censorWord = word.toCharArray();
+        for(int i = 0; i < censorWord.length; i++) {
+            censorWord[i] = '_';
+        }
+        return censorWord;
     }
 
     /**
