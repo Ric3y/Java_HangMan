@@ -5,20 +5,28 @@ public class hangMan {
     private static int guessLeft = 7;
     public static void main(String[] args) throws FileNotFoundException {
         Scanner scanner = new Scanner(System.in);
-        String randomWord = randomWordGenerator(readFile("wordList.txt"));
+        char[] randomWord = randomWordGenerator(readFile("wordList.txt"));
         char guess;
+        boolean guessedTheWord = false;
     
         //Start of game
         System.out.println("WELCOME TO HANGMAN"); 
-        System.out.println("You will have " + guessLeft + " attemps to guess a random word");
-        System.out.println("Random word is: " + randomWord); //remove later 
+        System.out.println("You will have " + guessLeft + " attempts to guess a random word");
+        System.out.println("Random word is: " + randomWord.toString()); //remove later 
 
         while (guessLeft > 0) {
             System.out.println("You have " + guessLeft + " left");
             System.out.println("Enter your guess with a character");
             guess = scanner.next().charAt(0);
             System.out.println("You guessed " + guess);
-            checkGuess(guess);  
+            checkGuess(guess, randomWord);  
+        }
+
+        if (guessLeft == 0 && guessedTheWord) {
+            System.out.println("Congrats you win :D");
+        }
+        else if (guessLeft == 0 && !guessedTheWord) {
+            System.out.println("You have ran out of attempts but have not guess the word");
         }
 
 
@@ -51,11 +59,11 @@ public class hangMan {
     /**
     * Generates a random word from a given ArrayList of words.
     */
-    public static String randomWordGenerator(ArrayList<String> wordsArray) {
+    public static char[] randomWordGenerator(ArrayList<String> wordsArray) {
         Random random = new Random();
         int randomIndex = random.nextInt(wordsArray.size());
         String randomWord = wordsArray.get(randomIndex);
-        return randomWord;
+        return randomWord.toCharArray();
     }
 
     /**
@@ -72,7 +80,9 @@ public class hangMan {
     /**
     * Check user input to word, main game logic here 
     */
-    public static void checkGuess(char guess) {
+    public static void checkGuess(char guess, char[] randomWord) {
+        
+        //for (int i = 0; i < )
         guessLeft--;
     }
 }
